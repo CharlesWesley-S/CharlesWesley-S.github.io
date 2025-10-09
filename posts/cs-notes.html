@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Computer Science Notes | Charles Wesley</title>
+  <style>
+    body { margin:0; font-family: "Segoe UI", Arial, sans-serif; background:#fafafa; }
+    header { background:#222; color:#fff; padding:14px 20px; }
+    header a { color:#00bcd4; text-decoration:none; }
+    main { max-width: 900px; margin: 28px auto; padding: 0 16px; background:#fff; border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,.06); }
+    .hero { padding: 26px 24px 0 24px; border-bottom:1px solid #eee; }
+    .hero h1 { margin:0 0 6px; font-size: 28px; }
+    .hero p { margin:0 0 18px; color:#555; }
+    #content { padding: 22px 24px 28px 24px; line-height:1.7; color:#222; }
+    #content h1, #content h2, #content h3 { margin-top: 1.2em; }
+    #content pre { background:#f6f8fa; padding:12px; overflow:auto; border-radius:8px; }
+    #loading { padding: 22px 24px; color:#666; }
+    .err { color:#b00020; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/index.html">← Back to Home</a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Computer Science Notes</h1>
+      <p>以下内容实时读取自仓库 <code>computer-science-notes</code> 的 <code>README.md</code>。</p>
+    </div>
+    <div id="loading">Loading README…</div>
+    <div id="content" style="display:none;"></div>
+  </main>
+
+  <!-- Markdown 解析器（CDN） -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    (async () => {
+      const RAW_URL = "https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/README.md";
+      const loading = document.getElementById('loading');
+      const content = document.getElementById('content');
+
+      try {
+        const resp = await fetch(RAW_URL, { cache: "no-store" });
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        const md = await resp.text();
+        content.innerHTML = marked.parse(md);
+        loading.style.display = "none";
+        content.style.display = "block";
+      } catch (e) {
+        loading.innerHTML = `<span class="err">读取 README 失败：</span> ${e.message}。请确认仓库存在且 README 在 main 分支。`;
+      }
+    })();
+  </script>
+</body>
+</html>
