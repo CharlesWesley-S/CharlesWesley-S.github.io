@@ -1,169 +1,192 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>计算机笔记目录 | Charles Wesley</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算机科学笔记目录 | Charles Wesley</title>
   <style>
     body {
-      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-      margin: 0;
-      background: #f8f9fb;
+      font-family: "Segoe UI", "PingFang SC", sans-serif;
+      background: #f7f9fc;
       color: #222;
+      margin: 0;
+      padding: 0;
     }
 
     header {
-      background: linear-gradient(120deg, #111, #1b1b1b);
+      background: linear-gradient(120deg, #111, #333);
       color: white;
       text-align: center;
-      padding: 60px 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      position: relative;
+      padding: 60px 20px 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     header h1 {
-      font-size: 2.2em;
+      font-size: 2em;
       margin-bottom: 0.3em;
     }
 
     header p {
-      color: #ccc;
+      font-size: 1.1em;
+      color: #bbb;
     }
 
     .top-buttons {
       position: absolute;
-      top: 20px;
-      right: 25px;
-      display: flex;
-      gap: 12px;
+      top: 15px;
+      left: 20px;
     }
 
     .top-buttons a {
-      color: #00ffaa;
+      color: white;
       text-decoration: none;
-      border: 1px solid #00ffaa;
+      margin-right: 15px;
+      background: rgba(255,255,255,0.15);
       padding: 6px 12px;
       border-radius: 6px;
       transition: 0.3s;
     }
 
     .top-buttons a:hover {
-      background: #00ffaa;
-      color: #111;
+      background: rgba(255,255,255,0.3);
     }
 
     main {
-      max-width: 1000px;
-      margin: 50px auto;
-      padding: 20px;
+      max-width: 950px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .card {
       background: white;
-      padding: 25px;
-      margin-bottom: 20px;
       border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-      transition: all 0.25s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      padding: 25px 30px;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
     }
 
     .card h2 {
-      margin: 0 0 10px;
-      color: #111;
-      font-size: 1.4em;
+      font-size: 1.3em;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .card h2 span {
+      margin-right: 8px;
     }
 
     .card p {
-      margin: 6px 0 12px;
       color: #555;
+      line-height: 1.6;
     }
 
     .card a {
       display: inline-block;
-      background: #00ffaa;
-      color: #111;
-      padding: 6px 12px;
-      border-radius: 5px;
+      margin-top: 10px;
+      color: #007bff;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
+      font-weight: 600;
     }
 
     .card a:hover {
-      background: #00cc88;
+      text-decoration: underline;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
+      padding: 40px 10px;
+      color: #666;
       background: #111;
-      color: #aaa;
-      margin-top: 60px;
+      font-size: 0.9em;
     }
   </style>
 </head>
-
 <body>
+
+  <!-- 顶部区域 -->
   <header>
     <div class="top-buttons">
       <a href="../index.html">🏠 返回主页</a>
       <a href="cs-notes.html">⬅ 返回上一级</a>
     </div>
-    <h1>📘 计算机科学笔记目录</h1>
-    <p>从算法、编程到系统与网络，完整知识索引</p>
+
+    <h1>💻 计算机科学笔记目录</h1>
+    <p>从算法、编程到系统与网络 — 完整知识索引</p>
   </header>
 
+  <!-- 主体内容 -->
   <main>
-    <div class="card">
-      <h2>🧩 编程基础</h2>
-      <p>基础语法、编程思维与逻辑清晰度训练</p>
-      <a href="markdown-viewer.html" target="_blank">查看目录指引</a>
+
+    <!-- 编程基础 -->
+    <div class="card" id="programming">
+      <h2><span>🧩</span> 编程基础</h2>
+      <p>C / Java / Python 语言语法与编程思想，强调逻辑与直觉思维。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/基础编程/目录指引.md" target="_blank">查看目录指引</a>
     </div>
 
-    <div class="card">
-      <h2>🧮 数据结构与算法</h2>
-      <p>从复杂度分析到实战算法题，配合可视化讲解</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/tree/main/中文/数据结构与算法">进入章节</a>
+    <!-- 算法与数据结构 -->
+    <div class="card" id="algorithms">
+      <h2><span>🧮</span> 算法与数据结构</h2>
+      <p>经典算法实现与复杂度分析，配以图形化可视化与生活类比。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/算法与数据结构/目录指引.md" target="_blank">查看目录指引</a>
     </div>
 
-    <div class="card">
-      <h2>⚙️ 操作系统与硬件</h2>
-      <p>ARM 架构、并发原理、调度机制与底层可视化分析</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/tree/main/中文/操作系统与硬件">进入章节</a>
+    <!-- 操作系统与硬件 -->
+    <div class="card" id="os-hw">
+      <h2><span>⚙️</span> 操作系统与硬件</h2>
+      <p>计算机组成原理、ARM 架构、底层执行机制拆解与分析。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/操作系统与硬件/目录指引.md" target="_blank">查看目录指引</a>
     </div>
 
-    <div class="card">
-      <h2>🌐 计算机网络</h2>
-      <p>TCP/IP、HTTP 与常见网络安全分析</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/tree/main/中文/计算机网络">进入章节</a>
+    <!-- 计算机网络 -->
+    <div class="card" id="networks">
+      <h2><span>🌐</span> 计算机网络</h2>
+      <p>TCP/IP 协议、HTTP、网络编程与安全基础。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/计算机网络/目录指引.md" target="_blank">查看目录指引</a>
     </div>
 
-    <div class="card">
-      <h2>📏 数学与逻辑</h2>
-      <p>集合论、逻辑、线代与概率基础</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/tree/main/中文/数学与逻辑">进入章节</a>
+    <!-- 数学与逻辑 -->
+    <div class="card" id="math-logic">
+      <h2><span>📏</span> 数学与逻辑</h2>
+      <p>集合、逻辑、概率、线性代数等计算机所依赖的数学直觉。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/数学与逻辑/目录指引.md" target="_blank">查看目录指引</a>
     </div>
 
-    <div class="card">
-      <h2>🔐 网络安全</h2>
-      <p>密码学原理、CTF 实战与安全协议</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/tree/main/中文/网络安全">进入章节</a>
+    <!-- 数据库 -->
+    <div class="card" id="database">
+      <h2><span>🗄️</span> 数据库</h2>
+      <p>SQL / NoSQL 基础、数据库建模与性能优化。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/数据库/目录指引.md" target="_blank">查看目录指引</a>
     </div>
 
-    <div class="card">
-      <h2>⚛️ 量子计算</h2>
-      <p>量子算法、复杂性问题与未来计算结构</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/tree/main/中文/量子计算">进入章节</a>
+    <!-- 网络安全 -->
+    <div class="card" id="cybersec">
+      <h2><span>🔐</span> 网络安全</h2>
+      <p>加密基础、常见攻击思路、安全协议与CTF技术分析。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/网络安全/目录指引.md" target="_blank">查看目录指引</a>
     </div>
+
+    <!-- 量子计算 -->
+    <div class="card" id="quantum">
+      <h2><span>⚛️</span> 量子计算</h2>
+      <p>量子计算的基本思想、复杂性问题与未来架构探索。</p>
+      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/中文/量子计算/目录指引.md" target="_blank">查看目录指引</a>
+    </div>
+
   </main>
 
   <footer>
-    © 2025 Charles Wesley | Knowledge flows like light.
+    © 2025 Charles Wesley — 知识共享 · 学术探索
   </footer>
+
 </body>
 </html>
