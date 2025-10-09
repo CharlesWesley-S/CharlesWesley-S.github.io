@@ -1,11 +1,120 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Charles Wesley</title>
-  </head>
-  <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charles Wesley's Site</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    /* 顶部导航栏 */
+    .navbar {
+      background-color: #222;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      padding: 16px 20px;
+      text-decoration: none;
+      font-weight: 600;
+      display: block;
+    }
+
+    .navbar a:hover {
+      background-color: #444;
+      color: #00bcd4;
+    }
+
+    /* 下拉菜单 */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 220px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #00bcd4;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* 主体部分 */
+    main {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 2.4em;
+      color: #222;
+    }
+
+    p {
+      color: #555;
+      font-size: 1.1em;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航栏 -->
+  <div class="navbar">
+    <a href="#">Home</a>
+
+    <div class="dropdown">
+      <a href="#">Projects ▼</a>
+      <div class="dropdown-content">
+        <a href="#">Computer Science Notes</a>
+        <a href="#">CTF Notes</a>
+        <a href="#">NoteFlow</a>
+        <a href="#">Quantum Computing</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="#">Writings ▼</a>
+      <div class="dropdown-content">
+        <a href="#">Novels</a>
+        <a href="#">Essays</a>
+        <a href="#">Philosophy</a>
+      </div>
+    </div>
+
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <!-- 主体内容 -->
+  <main>
     <h1>Welcome to Charles Wesley's Site</h1>
-    <p>This is my first GitHub Pages website!</p>
-  </body>
+    <p>Explore my projects, notes, and writings here.</p>
+  </main>
+
+</body>
 </html>
