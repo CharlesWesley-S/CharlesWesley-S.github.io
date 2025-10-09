@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Markdown 预览 | Charles Wesley</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 40px;
+      line-height: 1.7;
+      background: #fafafa;
+      color: #222;
+    }
+    pre, code {
+      background: #eee;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">加载中...</div>
+
+  <script>
+    // 你的 Markdown 文件 URL
+    const mdUrl = "https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/目录指引.md";
+    
+    fetch(mdUrl)
+      .then(res => res.text())
+      .then(text => {
+        document.getElementById("content").innerHTML = marked.parse(text);
+      });
+  </script>
+</body>
+</html>
