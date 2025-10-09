@@ -116,6 +116,60 @@
       opacity: 0.2;
       z-index: -1;
     }
+
+    #search-section {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: #0078ff;
+  box-shadow: 0 2px 10px rgba(0,120,255,0.2);
+}
+
+#searchResults {
+  margin-top: 20px;
+  text-align: left;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  display: none;
+}
+
+.search-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-item a {
+  font-weight: 600;
+  text-decoration: none;
+  color: #007bff;
+}
+
+.search-item p {
+  margin: 5px 0 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
   </style>
 </head>
 
@@ -127,6 +181,13 @@
     <h1>🧠 计算机科学笔记</h1>
     <p>Charles Wesley 的计算机笔记索引与知识图谱</p>
   </header>
+
+  <!-- 🔍 搜索栏 -->
+<section id="search-section">
+  <input type="text" id="searchInput" placeholder="搜索文章或模块…" onkeyup="searchArticles()">
+  <div id="searchResults"></div>
+</section>
+
 
   <main>
   <div class="card" id="programming">
