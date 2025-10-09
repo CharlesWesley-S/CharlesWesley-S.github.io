@@ -4,79 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Charles Wesley's Site</title>
+
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: "Segoe UI", sans-serif;
       background-color: #f8f9fa;
+      color: #222;
     }
 
     /* 顶部导航栏 */
-    .navbar {
-      background-color: #222;
+    nav {
+      background-color: #111;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
-    .navbar a {
+    nav a {
       color: white;
-      padding: 16px 20px;
       text-decoration: none;
-      font-weight: 600;
+      padding: 16px 20px;
       display: block;
+      transition: background-color 0.3s;
     }
 
-    .navbar a:hover {
-      background-color: #444;
-      color: #00bcd4;
+    nav a:hover {
+      background-color: #333;
     }
 
-    /* 下拉菜单 */
+    /* 下拉菜单容器 */
     .dropdown {
       position: relative;
       display: inline-block;
     }
 
+    /* 下拉菜单按钮 */
+    .dropbtn {
+      cursor: pointer;
+    }
+
+    /* 下拉内容 */
     .dropdown-content {
       display: none;
       position: absolute;
-      background-color: #333;
+      background-color: #222;
       min-width: 220px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      z-index: 1;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
+      border-radius: 6px;
+      top: 55px;
+      left: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+      z-index: 10;
     }
 
+    /* 下拉内容的链接 */
     .dropdown-content a {
-      color: white;
+      color: #eee;
       padding: 12px 16px;
       text-decoration: none;
       display: block;
     }
 
     .dropdown-content a:hover {
-      background-color: #00bcd4;
+      background-color: #444;
     }
 
+    /* 悬停展开 */
     .dropdown:hover .dropdown-content {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* 主体部分 */
-    main {
+    /* 顶部文字样式 */
+    header {
       text-align: center;
-      padding: 60px 20px;
+      padding: 100px 20px;
     }
 
-    h1 {
-      font-size: 2.4em;
-      color: #222;
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.4em;
     }
 
-    p {
+    header p {
       color: #555;
-      font-size: 1.1em;
+      font-size: 1.2em;
     }
 
   </style>
@@ -84,37 +103,37 @@
 <body>
 
   <!-- 顶部导航栏 -->
-  <div class="navbar">
-    <a href="#">Home</a>
+  <nav>
+    <a href="index.html">Home</a>
 
     <div class="dropdown">
-      <a href="#">Projects ▼</a>
+      <a class="dropbtn">Projects ▾</a>
       <div class="dropdown-content">
-        <a href="posts/cs-notes.html">Computer Science Notes</a>
-        <a href="#">CTF Notes</a>
-        <a href="#">NoteFlow</a>
-        <a href="#">Quantum Computing</a>
+        <a href="posts/cs-notes.html">💻 Computer Science Notes</a>
+        <a href="posts/ctf-notes.html">🧩 CTF Notes</a>
+        <a href="posts/noteflow.html">🗂️ NoteFlow System</a>
+        <a href="posts/quantum.html">⚛️ Quantum Computing</a>
       </div>
     </div>
 
     <div class="dropdown">
-      <a href="#">Writings ▼</a>
+      <a class="dropbtn">Writings ▾</a>
       <div class="dropdown-content">
-        <a href="#">Novels</a>
-        <a href="#">Essays</a>
-        <a href="#">Philosophy</a>
+        <a href="#">📘 江湖行</a>
+        <a href="#">🧠 哲学笔记</a>
+        <a href="#">✍️ 文学随笔</a>
       </div>
     </div>
 
     <a href="#">About</a>
     <a href="#">Contact</a>
-  </div>
+  </nav>
 
-  <!-- 主体内容 -->
-  <main>
+  <!-- 主页标题区 -->
+  <header>
     <h1>Welcome to Charles Wesley's Site</h1>
     <p>Explore my projects, notes, and writings here.</p>
-  </main>
+  </header>
 
 </body>
 </html>
