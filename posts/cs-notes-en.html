@@ -18,6 +18,7 @@
       padding: 60px 20px 40px;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
     }
 
     header h1 {
@@ -30,14 +31,16 @@
       color: #bbb;
     }
 
-    /* Language switch button */
-    .lang-switch {
+    /* 顶部按钮容器 */
+    .top-buttons {
       position: absolute;
       top: 20px;
       right: 25px;
+      display: flex;
+      gap: 12px;
     }
 
-    .lang-switch a {
+    .top-buttons a {
       color: #00ffaa;
       text-decoration: none;
       font-weight: bold;
@@ -47,7 +50,7 @@
       transition: 0.3s;
     }
 
-    .lang-switch a:hover {
+    .top-buttons a:hover {
       background: #00ffaa;
       color: #111;
     }
@@ -119,7 +122,8 @@
 
 <body>
   <header>
-    <div class="lang-switch">
+    <div class="top-buttons">
+      <a href="../index.html">🏠 Home</a>
       <a href="cs-notes.html">中文</a>
     </div>
     <h1>💻 Computer Science Notes</h1>
