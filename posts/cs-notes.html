@@ -1,57 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Computer Science Notes | Charles Wesley</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>计算机科学笔记 | Charles Wesley</title>
   <style>
-    body { margin:0; font-family: "Segoe UI", Arial, sans-serif; background:#fafafa; }
-    header { background:#222; color:#fff; padding:14px 20px; }
-    header a { color:#00bcd4; text-decoration:none; }
-    main { max-width: 900px; margin: 28px auto; padding: 0 16px; background:#fff; border-radius:12px; box-shadow: 0 6px 20px rgba(0,0,0,.06); }
-    .hero { padding: 26px 24px 0 24px; border-bottom:1px solid #eee; }
-    .hero h1 { margin:0 0 6px; font-size: 28px; }
-    .hero p { margin:0 0 18px; color:#555; }
-    #content { padding: 22px 24px 28px 24px; line-height:1.7; color:#222; }
-    #content h1, #content h2, #content h3 { margin-top: 1.2em; }
-    #content pre { background:#f6f8fa; padding:12px; overflow:auto; border-radius:8px; }
-    #loading { padding: 22px 24px; color:#666; }
-    .err { color:#b00020; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(120deg, #111, #222);
+      color: #fff;
+      padding: 60px 20px 40px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      margin-bottom: 0.2em;
+    }
+
+    header p {
+      font-size: 1.1em;
+      color: #bbb;
+    }
+
+    /* 语言切换按钮 */
+    .lang-switch {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+    }
+
+    .lang-switch a {
+      color: #00ffaa;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #00ffaa;
+      padding: 6px 12px;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .lang-switch a:hover {
+      background: #00ffaa;
+      color: #111;
+    }
+
+    /* 内容容器 */
+    main {
+      max-width: 1100px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      border-left: 6px solid #00ffaa;
+      padding-left: 10px;
+      color: #111;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      text-align: left;
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #111;
+      color: #aaa;
+      margin-top: 80px;
+    }
+
+    /* 可选背景效果：轻微纸纹 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      opacity: 0.2;
+      z-index: -1;
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <a href="/index.html">← Back to Home</a>
+    <div class="lang-switch">
+      <a href="cs-notes-en.html">English</a>
+    </div>
+    <h1>🧠 计算机科学笔记</h1>
+    <p>Charles Wesley 的计算机笔记索引与知识图谱</p>
   </header>
 
   <main>
-    <div class="hero">
-      <h1>Computer Science Notes</h1>
-      <p>以下内容实时读取自仓库 <code>computer-science-notes</code> 的 <code>README.md</code>。</p>
-    </div>
-    <div id="loading">Loading README…</div>
-    <div id="content" style="display:none;"></div>
+    <h2>📚 内容导览</h2>
+    <table>
+      <tr>
+        <th>模块</th>
+        <th>内容简介</th>
+        <th>入口</th>
+      </tr>
+      <tr>
+        <td>💻 基础编程</td>
+        <td>C / Java / Python 基础语法与编程思想，逻辑与直觉并重</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>🧮 算法与数据结构</td>
+        <td>经典算法思路与复杂度分析，配合可视化与生活类比</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>⚙️ 操作系统与硬件</td>
+        <td>计算机组成、操作系统原理与 ARM 架构底层机制</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>🌐 计算机网络</td>
+        <td>TCP/IP 协议、HTTP、网络编程与安全基础</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>📏 数学与逻辑</td>
+        <td>逻辑、概率、线代与集合论，计算机的数学基础</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>🗃️ 数据库</td>
+        <td>SQL 与 NoSQL，数据建模与优化</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>🔐 网络安全</td>
+        <td>加密基础与攻击思路，安全协议与 CTF 技术分析</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+      <tr>
+        <td>⚛️ 量子计算</td>
+        <td>量子算法、复杂性问题与未来计算架构</td>
+        <td><a href="#">进入目录</a></td>
+      </tr>
+    </table>
   </main>
 
-  <!-- Markdown 解析器（CDN） -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    (async () => {
-      const RAW_URL = "https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/README.md";
-      const loading = document.getElementById('loading');
-      const content = document.getElementById('content');
-
-      try {
-        const resp = await fetch(RAW_URL, { cache: "no-store" });
-        if (!resp.ok) throw new Error("HTTP " + resp.status);
-        const md = await resp.text();
-        content.innerHTML = marked.parse(md);
-        loading.style.display = "none";
-        content.style.display = "block";
-      } catch (e) {
-        loading.innerHTML = `<span class="err">读取 README 失败：</span> ${e.message}。请确认仓库存在且 README 在 main 分支。`;
-      }
-    })();
-  </script>
+  <footer>
+    © 2025 Charles Wesley | Knowledge is the architecture of freedom.
+  </footer>
 </body>
 </html>
