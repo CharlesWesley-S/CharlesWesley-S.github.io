@@ -21,10 +21,14 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle install
+        run: |
+          cd $GITHUB_WORKSPACE
+          bundle install
 
       - name: Build the site
-        run: bundle exec jekyll build
+        run: |
+          cd $GITHUB_WORKSPACE
+          bundle exec jekyll build
 
       - name: Upload site to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
