@@ -1,188 +1,224 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Computer Science Notes | Charles Wesley</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算机科学笔记 | Charles Wesley</title>
   <style>
+    /* ========== 全局样式 ========== */
     body {
       margin: 0;
       font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-      background-color: #f5f5f5;
+      background-color: #f5f7fa;
       color: #222;
     }
 
     header {
-      background: linear-gradient(120deg, #111, #222);
-      color: #fff;
-      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #111, #1b1b1b);
+      color: white;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      position: relative;
+      padding: 80px 20px 60px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     header h1 {
       font-size: 2.4em;
-      margin-bottom: 0.2em;
+      margin-bottom: 10px;
     }
 
     header p {
+      color: #ccc;
       font-size: 1.1em;
-      color: #bbb;
-    }
-
-    /* 顶部按钮容器 */
-    .top-buttons {
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      display: flex;
-      gap: 12px;
-    }
-
-    .top-buttons a {
-      color: #00ffaa;
-      text-decoration: none;
-      font-weight: bold;
-      border: 1px solid #00ffaa;
-      padding: 6px 12px;
-      border-radius: 5px;
-      transition: 0.3s;
-    }
-
-    .top-buttons a:hover {
-      background: #00ffaa;
-      color: #111;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 50px auto;
-      background: #fff;
-      border-radius: 10px;
-      padding: 40px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      border-left: 6px solid #00ffaa;
-      padding-left: 10px;
-      color: #111;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      padding: 12px 15px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    th {
-      text-align: left;
-      background: #f0f0f0;
-      color: #333;
-    }
-
-    tr:hover {
-      background-color: #f9f9f9;
     }
 
     a {
-      color: #007bff;
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
+    /* ========== 搜索栏样式 ========== */
+    #search-section {
       text-align: center;
-      padding: 30px;
-      background: #111;
-      color: #aaa;
-      margin-top: 80px;
+      margin: 40px auto;
+      max-width: 600px;
+      padding: 0 20px;
     }
 
-    body::before {
-      content: "";
+    #searchInput {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #0078ff;
+      box-shadow: 0 3px 12px rgba(0, 120, 255, 0.25);
+    }
+
+    #searchResults {
+      margin-top: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 10px 15px;
+      display: none;
+      text-align: left;
+    }
+
+    .search-item {
+      padding: 8px 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .search-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-item a {
+      color: #0078ff;
+      font-weight: 600;
+      font-size: 1.05em;
+    }
+
+    .search-item p {
+      margin: 5px 0 0;
+      color: #555;
+      font-size: 0.9em;
+    }
+
+    /* ========== 模块卡片样式 ========== */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      padding: 40px 20px 80px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      width: 85%;
+      max-width: 800px;
+      padding: 30px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.4em;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .card h2 span {
+      margin-right: 8px;
+    }
+
+    .card p {
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .card a {
+      color: #0078ff;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    /* ========== 返回主页按钮 ========== */
+    .back-btn {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-      opacity: 0.2;
-      z-index: -1;
+      bottom: 25px;
+      right: 25px;
+      background: #0078ff;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9em;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+      transition: 0.3s;
+    }
+
+    .back-btn:hover {
+      background: #005ec4;
+      transform: translateY(-2px);
     }
   </style>
 </head>
 
 <body>
+
+  <!-- ========== 顶部 ========== -->
   <header>
-    <div class="top-buttons">
-      <a href="../index.html">🏠 Home</a>
-      <a href="cs-notes.html">中文</a>
-    </div>
-    <h1>💻 Computer Science Notes</h1>
-    <p>Charles Wesley's Knowledge Index and Learning Archive</p>
+    <h1>🧠 computer science notes</h1>
+    <p>Charles Wesley's Computer Science Learning System and Notes Index</p>
   </header>
 
-  <main>
-    <h2>📘 Content Overview</h2>
-    <table>
-      <tr>
-        <th>Module</th>
-        <th>Description</th>
-        <th>Access</th>
-      </tr>
-      <tr>
-        <td>💻 Programming Basics</td>
-        <td>Core syntax and programming logic in C / Java / Python, blending intuition and reasoning.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>🧮 Algorithms & Data Structures</td>
-        <td>Classic algorithm paths, implementations, and complexity analysis with visualization examples.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>⚙️ Operating Systems & Hardware</td>
-        <td>Computer architecture, OS principles, and ARM-level mechanisms explained.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>🌐 Computer Networks</td>
-        <td>TCP/IP protocols, HTTP, routing mechanisms, and cybersecurity foundations.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>📏 Mathematics & Logic</td>
-        <td>Set theory, logic, probability, and linear algebra — the mathematical foundation of computing.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>🗃️ Databases</td>
-        <td>SQL / NoSQL fundamentals, schema design, and optimization techniques.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>🔐 Cybersecurity</td>
-        <td>Encryption, common attack strategies, and practical CTF-style examples.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-      <tr>
-        <td>⚛️ Quantum Computing</td>
-        <td>Quantum computing principles, algorithms, and theoretical models.</td>
-        <td><a href="#">Open</a></td>
-      </tr>
-    </table>
-  </main>
+  <!-- ========== 搜索栏 ========== -->
+  <section id="search-section">
+    <input type="text" id="searchInput" placeholder="🔍 Search for articles, modules or topics..." onkeyup="searchArticles()">
+    <div id="searchResults"></div>
+  </section>
 
-  <footer>
-    © 2025 Charles Wesley | Knowledge is the architecture of freedom.
-  </footer>
+  
+
+  <!-- ========== 返回主页按钮 ========== -->
+  <a href="../index.html" class="back-btn">🏠 home </a>
+
+  <!-- ========== 搜索脚本 ========== -->
+  <script>
+    const articles = [
+      { title: "编程基础", desc: "C / Java / Python Programming thinking and logical reasoning", link: "posts/programming.html" },
+      { title: "算法与数据结构", desc: "Classic algorithms, complexity analysis and visualization", link: "posts/algorithms.html" },
+      { title: "操作系统与硬件", desc: "Computer organization principles, ARM architecture, and system operation mechanisms", link: "posts/os-hw.html" },
+      { title: "计算机网络", desc: "TCP/IP, HTTP, network security protocols", link: "posts/networks.html" },
+      { title: "数学与逻辑", desc: "Sets, logic, linear algebra and computing foundations", link: "posts/math-logic.html" },
+      { title: "数据库", desc: "SQL, NoSQL, Modeling, and Optimization", link: "posts/database.html" },
+      { title: "网络安全", desc: "CTF problem solutions, encryption principles, and attack strategies", link: "posts/cybersec.html" },
+      { title: "量子计算", desc: "Quantum bits, algorithms, and future computing models", link: "posts/quantum.html" }
+    ];
+
+    function searchArticles() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const resultsContainer = document.getElementById("searchResults");
+      resultsContainer.innerHTML = "";
+
+      if (input.trim() === "") {
+        resultsContainer.style.display = "none";
+        return;
+      }
+
+      const filtered = articles.filter(a =>
+        a.title.toLowerCase().includes(input) ||
+        a.desc.toLowerCase().includes(input)
+      );
+
+      if (filtered.length === 0) {
+        resultsContainer.innerHTML = "<p>no result</p>";
+      } else {
+        filtered.forEach(a => {
+          const item = document.createElement("div");
+          item.className = "search-item";
+          item.innerHTML = `<a href="${a.link}" target="_blank">${a.title}</a><p>${a.desc}</p>`;
+          resultsContainer.appendChild(item);
+        });
+      }
+
+      resultsContainer.style.display = "block";
+    }
+  </script>
+
 </body>
 </html>
