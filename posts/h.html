@@ -1,159 +1,197 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>打怪升级学前端</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Java 基础模块 | Charles Wesley</title>
+  <style>
+    /* ======= 全局样式 ======= */
     body {
-        font-family: "Segoe UI", sans-serif;
-        background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-        color: #333;
-        text-align: center;
-        padding: 20px;
+      margin: 0;
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #000; /* 纯黑背景 */
+      color: #eee;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    h1 {
-        margin-bottom: 10px;
+    /* ======= 标题区 ======= */
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+      color: #00ffaa;
     }
 
-    .game-area {
-        margin: 20px auto;
-        background: #fff;
-        border-radius: 10px;
-        padding: 20px;
-        width: 300px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    header h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
     }
 
-    #monster {
-        font-size: 60px;
-        margin: 20px 0;
+    header p {
+      color: #aaa;
+      font-size: 1.1em;
     }
 
-    button {
-        background: #4CAF50;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: 0.3s;
+    /* ======= 卡片容器 ======= */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
     }
 
-    button:hover {
-        background: #45a049;
-    }
-
-    .status {
-        margin-top: 15px;
-        font-size: 18px;
-    }
-
-    .xp-bar {
-        width: 80%;
-        height: 20px;
-        background: #ddd;
-        border-radius: 10px;
-        margin: 10px auto;
-        overflow: hidden;
-    }
-
-    .xp-fill {
-        height: 100%;
-        background: #4CAF50;
-        width: 0%;
-        transition: width 0.3s;
-    }
-
-    .learning {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
+    /* ======= 单个卡片 ======= */
     .card {
-        background: #fff;
-        border-radius: 8px;
-        padding: 15px;
-        width: 180px;
-        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-        cursor: pointer;
-        transition: transform 0.2s;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 22px 24px;
+      border: 1px solid rgba(0,255,170,0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,255,170,0.05);
     }
 
     .card:hover {
-        transform: scale(1.05);
+      transform: translateY(-6px);
+      border-color: #00ffaa;
+      box-shadow: 0 10px 20px rgba(0,255,170,0.2);
     }
-</style>
+
+    .card h3 {
+      margin-top: 0;
+      color: #00ffaa;
+    }
+
+    .card p {
+      color: #ccc;
+      line-height: 1.6;
+      font-size: 0.95em;
+    }
+
+    /* ======= 按钮 ======= */
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background-color: #00ffaa;
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #00e699;
+    }
+
+    /* ======= 返回按钮 ======= */
+    .back {
+      display: block;
+      text-align: center;
+      margin: 40px auto 20px;
+      color: #888;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .back:hover {
+      color: #00ffaa;
+    }
+
+    /* ======= 页脚 ======= */
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #555;
+      font-size: 0.9em;
+    }
+
+    /* ======= Markdown 渲染区 ======= */
+    #content {
+      max-width: 800px;
+      margin: 50px auto;
+      color: #eee;
+      line-height: 1.7;
+      display: none;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      padding: 30px;
+      border: 1px solid rgba(0,255,170,0.1);
+      box-shadow: 0 4px 10px rgba(0,255,170,0.05);
+    }
+
+    #content img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 10px 0;
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <h1>☕ Java 基础模块</h1>
+    <p>掌握 Java 的核心语法与面向对象思想，从基础到进阶，循序渐进。</p>
+  </header>
 
-<h1>⚔️ 打怪升级学前端 ⚔️</h1>
-
-<div class="game-area">
-    <div id="monster">👾</div>
-    <button id="attackBtn">攻击怪物</button>
-    <div class="status">
-        等级：<span id="level">1</span><br>
-        经验：<span id="xp">0</span> / <span id="nextXp">10</span>
+  <div class="container">
+    <div class="card">
+      <h3>📘 第一章：初次认识html</h3>
+      <p>介绍 Java 的变量类型、作用域、Scanner 输入、以及基础控制结构。</p>
+      <a href="javascript:void(0);" 
+         onclick="loadArticle('https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/网络安全/html/html1：从html开始了解网页.md')" 
+         class="btn">阅读</a>
     </div>
-    <div class="xp-bar"><div class="xp-fill" id="xpBar"></div></div>
-</div>
 
-<h2>📚 学习内容</h2>
-<div class="learning">
-    <div class="card" onclick="showInfo('HTML')">
-        <strong>HTML</strong><br>
-        结构之基！
+    <div class="card">
+      <h3>🏗️ 第二章：面向对象思想</h3>
+      <p>理解类、对象、构造方法与封装机制，掌握 Java 的核心编程模式。</p>
+      <a href="#" class="btn">阅读</a>
     </div>
-    <div class="card" onclick="showInfo('CSS')">
-        <strong>CSS</strong><br>
-        美化之魂！
+
+    <div class="card">
+      <h3>🧩 第三章：数组与集合</h3>
+      <p>深入掌握数组的使用、List 与 Map 的概念，为后续算法学习打下基础。</p>
+      <a href="#" class="btn">阅读</a>
     </div>
-    <div class="card" onclick="showInfo('JavaScript')">
-        <strong>JavaScript</strong><br>
-        灵魂之力！
+
+    <div class="card">
+      <h3>⚙️ 第四章：异常处理与文件 I/O</h3>
+      <p>学习异常机制、try-catch-finally 的用法，掌握文件输入输出的基础。</p>
+      <a href="#" class="btn">阅读</a>
     </div>
-</div>
+  </div>
 
-<p id="infoText" style="margin-top:20px;font-size:18px;"></p>
+  <div id="content"></div>
 
-<script>
-let level = 1;
-let xp = 0;
-let nextXp = 10;
+  <a href="programming.html" class="back">⬅ 返回编程目录</a>
 
-document.getElementById("attackBtn").addEventListener("click", () => {
-    xp += 2;
-    if (xp >= nextXp) {
-        xp = 0;
-        level++;
-        nextXp = Math.floor(nextXp * 1.5);
-        alert("🎉 恭喜你升到 Lv." + level + "！");
+  <footer>
+    © 2025 Charles Wesley — Java Section
+  </footer>
+
+  <!-- Markdown 渲染逻辑 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    function loadArticle(url) {
+      fetch(url)
+        .then(res => res.text())
+        .then(data => {
+          // 修复相对路径图片
+          const baseURL = 'https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/网络安全/html';
+          const fixedData = data.replace(/\!\[(.*?)\]\((?!http)(.*?)\)/g, (m, alt, path) => {
+            return `![${alt}](${baseURL}${path})`;
+          });
+
+          document.querySelector('.container').style.display = 'none';
+          const content = document.getElementById('content');
+          content.style.display = 'block';
+          content.innerHTML = marked.parse(fixedData);
+        })
+        .catch(err => alert('加载失败：' + err));
     }
-    updateStatus();
-});
-
-function updateStatus() {
-    document.getElementById("level").textContent = level;
-    document.getElementById("xp").textContent = xp;
-    document.getElementById("nextXp").textContent = nextXp;
-    document.getElementById("xpBar").style.width = (xp / nextXp * 100) + "%";
-}
-
-function showInfo(topic) {
-    const info = {
-        HTML: "HTML（超文本标记语言）用于定义网页的结构，例如标题、段落、图片和链接。",
-        CSS: "CSS（层叠样式表）用于设置网页的外观，例如颜色、字体、布局和动画。",
-        JavaScript: "JavaScript 让网页变得有生命！它可以实现动态交互、控制DOM、与服务器通信等。"
-    };
-    document.getElementById("infoText").textContent = info[topic];
-}
-</script>
-
+  </script>
 </body>
 </html>
