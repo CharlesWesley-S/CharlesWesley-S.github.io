@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章阅读 | Charles Wesley</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", "PingFang SC", sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      color: #111;
+    }
+    pre {
+      background: #222;
+      color: #eee;
+      padding: 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    a {
+      color: #0078ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    #content {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #0078ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="../posts/cs-notes.html">← 返回笔记目录</a>
+  <div id="content">加载中...</div>
+
+  <script>
+    // 解析 URL 参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const fileParam = urlParams.get("file");
+
+    if (!fileParam) {
+      document.getElementById("content").innerHTML = "<p>❌ 没有指定文件。</p>";
+    } else {
+      const mdUrl = `https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/${fileParam}`;
+      fetch(mdUrl)
+        .then(res => res.text())
+        .then(text => {
+          document.getElementById("content").innerHTML = marked.parse(text);
+        })
+        .catch(() => {
+          document.getElementById("content").innerHTML = "<p>⚠️ 加载失败，请检查文件路径。</p>";
+        });
+    }
+  </script>
+</body>
+</html>
