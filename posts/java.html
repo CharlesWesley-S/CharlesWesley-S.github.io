@@ -6,14 +6,34 @@
   <title>Java 基础模块 | Charles Wesley</title>
   <style>
     body {
-      margin: 0;
-      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top left, #101820, #0a0a0a 60%);
-      color: #eee;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+      <div id="particles"></div>
+  margin: 0;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  background: linear-gradient(120deg, #020024, #090979, #00d4ff);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+  color: #eee;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
 
+/* 动态渐变动画 */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 粒子效果容器 */
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
     header {
       text-align: center;
       padding: 80px 20px 40px;
@@ -105,15 +125,21 @@
 </head>
  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-  // 点击按钮加载 GitHub Markdown 内容
   function loadArticle(url) {
     fetch(url)
       .then(res => res.text())
       .then(data => {
-        document.querySelector('.container').style.display = 'none'; // 隐藏卡片
+        // 让图片路径变成完整 GitHub raw 链接
+        const baseURL = 'https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/java/';
+        const fixedData = data.replace(/\!\[(.*?)\]\((?!http)(.*?)\)/g, (match, alt, path) => {
+          return `![${alt}](${baseURL}${path})`;
+        });
+
+        // 隐藏卡片区
+        document.querySelector('.container').style.display = 'none';
         const content = document.getElementById('content');
         content.style.display = 'block';
-        content.innerHTML = marked.parse(data);
+        content.innerHTML = marked.parse(fixedData);
       })
       .catch(err => {
         alert('加载失败：' + err);
@@ -162,5 +188,24 @@
   <footer>
     © 2025 Charles Wesley — Java Section
   </footer>
+   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#00ffaa" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: { enable: true, distance: 150, color: "#00ffaa", opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1 }
+      },
+      interactivity: {
+        events: { onhover: { enable: true, mode: "repulse" } },
+        modes: { repulse: { distance: 100, duration: 0.4 } }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>
