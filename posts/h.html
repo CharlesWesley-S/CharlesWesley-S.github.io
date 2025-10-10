@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>打怪升级学前端</title>
+<style>
+    body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    .game-area {
+        margin: 20px auto;
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        width: 300px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #monster {
+        font-size: 60px;
+        margin: 20px 0;
+    }
+
+    button {
+        background: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #45a049;
+    }
+
+    .status {
+        margin-top: 15px;
+        font-size: 18px;
+    }
+
+    .xp-bar {
+        width: 80%;
+        height: 20px;
+        background: #ddd;
+        border-radius: 10px;
+        margin: 10px auto;
+        overflow: hidden;
+    }
+
+    .xp-fill {
+        height: 100%;
+        background: #4CAF50;
+        width: 0%;
+        transition: width 0.3s;
+    }
+
+    .learning {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 15px;
+        width: 180px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+
+<h1>⚔️ 打怪升级学前端 ⚔️</h1>
+
+<div class="game-area">
+    <div id="monster">👾</div>
+    <button id="attackBtn">攻击怪物</button>
+    <div class="status">
+        等级：<span id="level">1</span><br>
+        经验：<span id="xp">0</span> / <span id="nextXp">10</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" id="xpBar"></div></div>
+</div>
+
+<h2>📚 学习内容</h2>
+<div class="learning">
+    <div class="card" onclick="showInfo('HTML')">
+        <strong>HTML</strong><br>
+        结构之基！
+    </div>
+    <div class="card" onclick="showInfo('CSS')">
+        <strong>CSS</strong><br>
+        美化之魂！
+    </div>
+    <div class="card" onclick="showInfo('JavaScript')">
+        <strong>JavaScript</strong><br>
+        灵魂之力！
+    </div>
+</div>
+
+<p id="infoText" style="margin-top:20px;font-size:18px;"></p>
+
+<script>
+let level = 1;
+let xp = 0;
+let nextXp = 10;
+
+document.getElementById("attackBtn").addEventListener("click", () => {
+    xp += 2;
+    if (xp >= nextXp) {
+        xp = 0;
+        level++;
+        nextXp = Math.floor(nextXp * 1.5);
+        alert("🎉 恭喜你升到 Lv." + level + "！");
+    }
+    updateStatus();
+});
+
+function updateStatus() {
+    document.getElementById("level").textContent = level;
+    document.getElementById("xp").textContent = xp;
+    document.getElementById("nextXp").textContent = nextXp;
+    document.getElementById("xpBar").style.width = (xp / nextXp * 100) + "%";
+}
+
+function showInfo(topic) {
+    const info = {
+        HTML: "HTML（超文本标记语言）用于定义网页的结构，例如标题、段落、图片和链接。",
+        CSS: "CSS（层叠样式表）用于设置网页的外观，例如颜色、字体、布局和动画。",
+        JavaScript: "JavaScript 让网页变得有生命！它可以实现动态交互、控制DOM、与服务器通信等。"
+    };
+    document.getElementById("infoText").textContent = info[topic];
+}
+</script>
+
+</body>
+</html>
