@@ -180,7 +180,7 @@
         .then(res => res.text())
         .then(data => {
           // 修复相对路径图片
-          const baseURL = 'https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/网络安全/html';
+          const baseURL = 'https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/网络安全';
           const fixedData = data.replace(/\!\[(.*?)\]\((?!http)(.*?)\)/g, (m, alt, path) => {
             return `![${alt}](${baseURL}${path})`;
           });
