@@ -5,32 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Java 基础模块 | Charles Wesley</title>
   <style>
-   body {
-  margin: 0;
-  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
-  color: #eee;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-/* 动态渐变动画 */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    /* ======= 全局样式 ======= */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      background-color: #000; /* 纯黑背景 */
+      color: #eee;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-/* 粒子容器 */
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background: radial-gradient(circle at top left, #0a0a0a 0%, #000000 80%);
-}
+    /* ======= 标题区 ======= */
     header {
       text-align: center;
       padding: 80px 20px 40px;
@@ -43,10 +28,11 @@
     }
 
     header p {
-      color: #ccc;
+      color: #aaa;
       font-size: 1.1em;
     }
 
+    /* ======= 卡片容器 ======= */
     .container {
       max-width: 1000px;
       margin: 0 auto;
@@ -56,22 +42,22 @@
       gap: 25px;
     }
 
+    /* ======= 单个卡片 ======= */
     .card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  padding: 22px 24px;
-  border: 1px solid rgba(0,255,170,0.1);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,255,170,0.05);
-}
-
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 22px 24px;
+      border: 1px solid rgba(0,255,170,0.1);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,255,170,0.05);
+    }
 
     .card:hover {
-  transform: translateY(-6px);
-  border-color: #00ffaa;
-  box-shadow: 0 10px 20px rgba(0,255,170,0.2);
-}
+      transform: translateY(-6px);
+      border-color: #00ffaa;
+      box-shadow: 0 10px 20px rgba(0,255,170,0.2);
+    }
+
     .card h3 {
       margin-top: 0;
       color: #00ffaa;
@@ -83,6 +69,7 @@
       font-size: 0.95em;
     }
 
+    /* ======= 按钮 ======= */
     .btn {
       display: inline-block;
       margin-top: 10px;
@@ -99,11 +86,12 @@
       background-color: #00e699;
     }
 
+    /* ======= 返回按钮 ======= */
     .back {
       display: block;
       text-align: center;
       margin: 40px auto 20px;
-      color: #aaa;
+      color: #888;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -112,37 +100,36 @@
       color: #00ffaa;
     }
 
+    /* ======= 页脚 ======= */
     footer {
       text-align: center;
       padding: 20px;
-      color: #666;
+      color: #555;
       font-size: 0.9em;
+    }
+
+    /* ======= Markdown 渲染区 ======= */
+    #content {
+      max-width: 800px;
+      margin: 50px auto;
+      color: #eee;
+      line-height: 1.7;
+      display: none;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      padding: 30px;
+      border: 1px solid rgba(0,255,170,0.1);
+      box-shadow: 0 4px 10px rgba(0,255,170,0.05);
+    }
+
+    #content img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 10px 0;
     }
   </style>
 </head>
- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-  function loadArticle(url) {
-    fetch(url)
-      .then(res => res.text())
-      .then(data => {
-        // 让图片路径变成完整 GitHub raw 链接
-        const baseURL = 'https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/java/';
-        const fixedData = data.replace(/\!\[(.*?)\]\((?!http)(.*?)\)/g, (match, alt, path) => {
-          return `![${alt}](${baseURL}${path})`;
-        });
 
-        // 隐藏卡片区
-        document.querySelector('.container').style.display = 'none';
-        const content = document.getElementById('content');
-        content.style.display = 'block';
-        content.innerHTML = marked.parse(fixedData);
-      })
-      .catch(err => {
-        alert('加载失败：' + err);
-      });
-  }
-</script>
 <body>
   <header>
     <h1>☕ Java 基础模块</h1>
@@ -150,13 +137,12 @@
   </header>
 
   <div class="container">
-
     <div class="card">
       <h3>📘 第一章：基本语法与变量</h3>
       <p>介绍 Java 的变量类型、作用域、Scanner 输入、以及基础控制结构。</p>
       <a href="javascript:void(0);" 
-   onclick="loadArticle('https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/java/java：基本知识.md')" 
-   class="btn">阅读</a>
+         onclick="loadArticle('https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/java/java：基本知识.md')" 
+         class="btn">阅读</a>
     </div>
 
     <div class="card">
@@ -176,33 +162,37 @@
       <p>学习异常机制、try-catch-finally 的用法，掌握文件输入输出的基础。</p>
       <a href="#" class="btn">阅读</a>
     </div>
-
   </div>
 
+  <div id="content"></div>
+
   <a href="programming.html" class="back">⬅ 返回编程目录</a>
-  <div id="content" style="max-width:800px;margin:50px auto;color:#eee;line-height:1.7;display:none;"></div>
 
   <footer>
     © 2025 Charles Wesley — Java Section
   </footer>
-   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+  <!-- Markdown 渲染逻辑 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    particlesJS("particles", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#00ffaa" },
-        shape: { type: "circle" },
-        opacity: { value: 0.3 },
-        size: { value: 3 },
-        line_linked: { enable: true, distance: 150, color: "#00ffaa", opacity: 0.2, width: 1 },
-        move: { enable: true, speed: 1 }
-      },
-      interactivity: {
-        events: { onhover: { enable: true, mode: "repulse" } },
-        modes: { repulse: { distance: 100, duration: 0.4 } }
-      },
-      retina_detect: true
-    });
+    function loadArticle(url) {
+      fetch(url)
+        .then(res => res.text())
+        .then(data => {
+          // 修复相对路径图片
+          const baseURL = 'https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/java/';
+          const fixedData = data.replace(/\!\[(.*?)\]\((?!http)(.*?)\)/g, (m, alt, path) => {
+            return `![${alt}](${baseURL}${path})`;
+          });
+
+          document.querySelector('.container').style.display = 'none';
+          const content = document.getElementById('content');
+          content.style.display = 'block';
+          content.innerHTML = marked.parse(fixedData);
+        })
+        .catch(err => alert('加载失败：' + err));
+    }
   </script>
 </body>
 </html>
+
