@@ -136,6 +136,28 @@
       font-size: 0.95em;
     }
 
+    .lang-switch {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  background: #111;
+  padding: 8px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.lang-switch a {
+  color: white;
+  margin: 0 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+ .lang-switch a:hover {
+  color: #00ffaa;
+ }
+
     /* ========== 返回主页按钮 ========== */
     .back-btn {
       position: fixed;
@@ -176,7 +198,9 @@
 
   <!-- ========== 返回主页按钮 ========== -->
   <a href="../index.html" class="back-btn">🏠 home </a>
-  <a href="posts/cs-notes.html"> 中文</a>
+ <div class="lang-switch">
+   <a href="cs-notes.html">🌏 中文</a>
+ </div>
 
   <!-- ========== 搜索脚本 ========== -->
   <script>
