@@ -103,6 +103,23 @@
     }
   </style>
 </head>
+ <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  // 点击按钮加载 GitHub Markdown 内容
+  function loadArticle(url) {
+    fetch(url)
+      .then(res => res.text())
+      .then(data => {
+        document.querySelector('.container').style.display = 'none'; // 隐藏卡片
+        const content = document.getElementById('content');
+        content.style.display = 'block';
+        content.innerHTML = marked.parse(data);
+      })
+      .catch(err => {
+        alert('加载失败：' + err);
+      });
+  }
+</script>
 <body>
   <header>
     <h1>☕ Java 基础模块</h1>
@@ -114,7 +131,9 @@
     <div class="card">
       <h3>📘 第一章：基本语法与变量</h3>
       <p>介绍 Java 的变量类型、作用域、Scanner 输入、以及基础控制结构。</p>
-      <a href="https://github.com/CharlesWesley-S/computer-science-notes/blob/main/%E4%B8%AD%E6%96%87/%E5%9F%BA%E7%A1%80%E7%BC%96%E7%A8%8B/java/java%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86.md";" class="btn">阅读</a>
+      <a href="javascript:void(0);" 
+   onclick="loadArticle('https://raw.githubusercontent.com/CharlesWesley-S/computer-science-notes/main/中文/基础编程/java/java：基本知识.md')" 
+   class="btn">阅读</a>
     </div>
 
     <div class="card">
@@ -138,6 +157,7 @@
   </div>
 
   <a href="programming.html" class="back">⬅ 返回编程目录</a>
+  <div id="content" style="max-width:800px;margin:50px auto;color:#eee;line-height:1.7;display:none;"></div>
 
   <footer>
     © 2025 Charles Wesley — Java Section
