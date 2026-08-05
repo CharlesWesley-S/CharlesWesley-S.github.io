@@ -208,6 +208,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .directory-group-title b { color:#49677b; font:700 .72rem var(--mono); }
 .directory-entries { display:grid; gap:10px; }
 .directory-empty { margin:0; padding:18px 20px; border:1px dashed var(--line); color:#587187; font:.78rem/1.7 var(--mono); }
+.repository-search-results { margin:22px 0 38px; padding:22px; border:1px solid rgba(34,211,238,.24); background:linear-gradient(145deg,rgba(8,23,45,.82),rgba(5,9,22,.72)); box-shadow:0 0 46px rgba(34,211,238,.045); }
+.repository-search-results .directory-group-title { margin-bottom:16px; }
+.search-article-row { background:linear-gradient(135deg,rgba(11,28,52,.88),rgba(6,11,25,.78)); }
 .article-row { display:grid; grid-template-columns:52px minmax(0,1fr) 28px; align-items:center; gap:18px; padding:23px 25px; border:1px solid var(--line); background:linear-gradient(135deg,rgba(12,22,47,.76),rgba(5,9,22,.72)); color:inherit; text-decoration:none; transition:transform .22s ease,border-color .22s ease,background .22s ease; }
 .article-row:hover { transform:translateX(5px); border-color:var(--line-strong); background:linear-gradient(135deg,rgba(13,30,57,.86),rgba(7,13,29,.78)); }
 .article-index { color:var(--cyan); font:700 .78rem var(--mono); letter-spacing:.12em; }
