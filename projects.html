@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Selected projects by Charles Wesley across cybersecurity, AI agents and quantum computing.">
+  <meta name="theme-color" content="#050816">
+  <title>Projects · Charles Wesley</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body data-page="projects">
+  <canvas id="cosmos" aria-hidden="true"></canvas>
+  <div class="aurora aurora-one" aria-hidden="true"></div>
+  <div class="aurora aurora-two" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">CW</span><span>Charles Wesley</span></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="index.html#about" data-i18n="nav.about">About</a>
+        <a class="active" href="projects.html" data-i18n="nav.projects">Projects</a>
+        <a href="index.html#activity" data-i18n="nav.activity">Activity</a>
+        <a href="https://github.com/CharlesWesley-S" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </div>
+      <div class="language-switch" aria-label="Language">
+        <button type="button" data-language="en" aria-pressed="true">EN</button><span>/</span><button type="button" data-language="zh" aria-pressed="false">中文</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="project-hero shell reveal">
+      <p class="mono-label">// MISSION_CONTROL</p>
+      <h1 data-i18n="projectPage.title">Projects built at the edge of trust and intelligence.</h1>
+      <p data-i18n="projectPage.intro">A growing collection of practical prototypes, research explorations, and systems designed to turn difficult ideas into useful technology.</p>
+      <div class="project-filter" aria-label="Project domains">
+        <span>SECURITY</span><span>AI AGENTS</span><span>QUANTUM</span><span>SYSTEMS</span>
+      </div>
+    </section>
+
+    <section class="section shell project-list">
+      <article class="mission-card reveal" id="guardian">
+        <div class="mission-visual cyan-field"><span>01</span><div class="radar"></div></div>
+        <div class="mission-copy">
+          <div class="mission-meta"><span class="status active-status" data-i18n="status.development">IN DEVELOPMENT</span><code>SEC / AI</code></div>
+          <h2 data-i18n="projects.guardianTitle">AI Anti-Scam Guardian</h2>
+          <p data-i18n="projectPage.guardianLong">Inspired by a real experience, this platform explores how AI can help people identify malicious links, QR codes, manipulative conversations, fake identities, and AI-generated media before risk becomes a personal crisis.</p>
+          <div class="tag-row"><span>Python</span><span>Machine Learning</span><span>FastAPI</span><span>Human-centered Security</span></div>
+        </div>
+      </article>
+
+      <article class="mission-card reveal" id="work-agent">
+        <div class="mission-visual violet-field"><span>02</span><div class="agent-nodes"><i></i><i></i><i></i><i></i></div></div>
+        <div class="mission-copy">
+          <div class="mission-meta"><span class="status prototype-status" data-i18n="status.prototype">PROTOTYPE</span><code>AGENT / OPS</code></div>
+          <h2 data-i18n="projects.agentTitle">Enterprise Work Agent</h2>
+          <p data-i18n="projectPage.agentLong">A work assistant that reads documents and image-based files, generates meeting summaries, extracts action items, retrieves information, and connects everyday collaboration with safe automation.</p>
+          <div class="tag-row"><span>AI Agent</span><span>OCR</span><span>FastAPI</span><span>Automation</span></div>
+        </div>
+      </article>
+
+      <article class="mission-card reveal" id="vqc">
+        <div class="mission-visual magenta-field"><span>03</span><div class="quantum-mini"><i></i><i></i><i></i></div></div>
+        <div class="mission-copy">
+          <div class="mission-meta"><span class="status research-status" data-i18n="status.research">RESEARCH</span><code>QML / IDS</code></div>
+          <h2 data-i18n="projects.vqcTitle">VQC Intrusion Detection</h2>
+          <p data-i18n="projectPage.vqcLong">An entry into quantum machine learning: studying variational quantum classifiers, hybrid quantum-classical pipelines, and their potential contribution to network intrusion detection.</p>
+          <div class="tag-row"><span>VQC</span><span>Quantum ML</span><span>Cybersecurity</span><span>Research</span></div>
+        </div>
+      </article>
+
+      <article class="mission-card reveal" id="knowledge">
+        <div class="mission-visual blue-field"><span>04</span><div class="knowledge-lines"><i></i><i></i><i></i><i></i></div></div>
+        <div class="mission-copy">
+          <div class="mission-meta"><span class="status archive-status" data-i18n="status.knowledge">KNOWLEDGE SYSTEM</span><code>NOTES / LOGIC</code></div>
+          <h2 data-i18n="projectPage.knowledgeTitle">Knowledge & Experiment Archive</h2>
+          <p data-i18n="projectPage.knowledgeLong">Structured notes and experiments across computer science, CTF practice, algorithms, systems, and quantum computing—designed as a growing map rather than a static folder.</p>
+          <div class="archive-links">
+            <a href="posts/cs-notes-en.html" data-i18n="projectPage.csNotes">Computer Science Notes →</a>
+            <a href="posts/ctf-notes.html" data-i18n="projectPage.ctfNotes">CTF Notes →</a>
+            <a href="posts/quantum.html" data-i18n="projectPage.quantumNotes">Quantum Notes →</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="contact shell reveal">
+      <p class="mono-label">// OPEN_CHANNEL</p>
+      <h2 data-i18n="projectPage.ctaTitle">These missions are still evolving.</h2>
+      <p data-i18n="projectPage.ctaText">The best projects begin as questions. Follow the work, share an idea, or build something ambitious with me.</p>
+      <a class="button button-primary" href="https://github.com/CharlesWesley-S" target="_blank" rel="noreferrer"><span data-i18n="projectPage.ctaButton">View GitHub profile</span><span>↗</span></a>
+    </section>
+  </main>
+
+  <footer class="footer shell"><span>© <span data-current-year></span> Charles Wesley</span><span data-i18n="footer.line">Build boldly. Verify carefully. Stay curious.</span></footer>
+</body>
+</html>
