@@ -112,7 +112,7 @@ function articleRouteForPath(path){
   for(const [topicKey,topic] of Object.entries(knowledgeTopics)){
     for(const lang of ["zh","en"]){
       const article=allArticles(topic,lang).find(item=>item.path===path);
-      if(article) return `article.html?topic=${topicKey}&article=${article.id}&v=20260805-6`;
+      if(article) return `article.html?topic=${topicKey}&article=${article.id}&v=20260805-7`;
     }
   }
   return null;
@@ -184,7 +184,7 @@ function renderTopic(){
     const section=document.createElement("section"); section.className="directory-group";
     section.innerHTML=`<div class="directory-group-title"><span>${escapeHtml(group.name)}</span><b>${String(group.articles.length).padStart(2,"0")}</b></div>`;
     const entries=document.createElement("div"); entries.className="directory-entries";
-    group.articles.forEach((article,index)=>{ const link=document.createElement("a"); link.className="article-row"; link.href=`article.html?topic=${key}&article=${article.id}&v=20260805-6`; link.innerHTML=`<span class="article-index">${String(index+1).padStart(2,"0")}</span><span><small>${escapeHtml(article.code)}</small><strong>${escapeHtml(article.title)}</strong><em>${escapeHtml(article.description)}</em></span><b>↗</b>`; entries.appendChild(link); });
+    group.articles.forEach((article,index)=>{ const link=document.createElement("a"); link.className="article-row"; link.href=`article.html?topic=${key}&article=${article.id}&v=20260805-7`; link.innerHTML=`<span class="article-index">${String(index+1).padStart(2,"0")}</span><span><small>${escapeHtml(article.code)}</small><strong>${escapeHtml(article.title)}</strong><em>${escapeHtml(article.description)}</em></span><b>↗</b>`; entries.appendChild(link); });
     if(!group.articles.length){ const empty=document.createElement("p"); empty.className="directory-empty"; empty.textContent=lang==="zh"?"该目录已经建立，文章尚未发布。":"Directory created — articles have not been published yet."; entries.appendChild(empty); }
     section.appendChild(entries); list.appendChild(section);
   });
@@ -197,7 +197,7 @@ async function renderArticle(){
   if(!article){ body.innerHTML=`<div class="empty-state"><span>∅</span><h2>${lang==="zh"?"没有找到这篇文章。":"Article not found."}</h2></div>`; return; }
   document.body.dataset.titleEn=`${article.title} · Charles Wesley`; document.body.dataset.titleZh=`${article.title} · Charles Wesley`; document.title=document.body.dataset.titleEn;
   document.getElementById("article-code").textContent=article.code; document.getElementById("article-title").textContent=article.title; document.getElementById("article-lead").textContent=article.description;
-  const back=document.getElementById("topic-back"); back.href=`topic.html?topic=${key}&v=20260805-6`; back.querySelector("span").textContent=lang==="zh"?`返回${topic.title.zh}目录`:`Back to ${topic.title.en}`;
+  const back=document.getElementById("topic-back"); back.href=`topic.html?topic=${key}&v=20260805-7`; back.querySelector("span").textContent=lang==="zh"?`返回${topic.title.zh}目录`:`Back to ${topic.title.en}`;
   const source=document.getElementById("article-source"); if(source){ source.href=blobUrl(article.path); source.textContent=lang==="zh"?"在 GitHub 查看原文 ↗":"View source on GitHub ↗"; }
   body.innerHTML=`<div class="article-loading"><span></span>${lang==="zh"?"正在读取 computer-science-notes 仓库…":"Loading from the computer-science-notes repository…"}</div>`;
   try{
@@ -210,6 +210,44 @@ async function renderArticle(){
   }
 }
 
-function renderKnowledgePage(){ renderTopic(); renderArticle(); }
+function repositorySearchRecords(lang){
+  const records=[];
+  Object.entries(knowledgeTopics).forEach(([topicKey,topic])=>{
+    (topic.groups[lang]||[]).forEach(group=>group.articles.forEach(article=>records.push({topicKey,topic,group:group.name,article})));
+  });
+  return records;
+}
+
+function renderRepositorySearch(){
+  const input=document.getElementById("post-search"),section=document.getElementById("repository-search-results"),list=document.getElementById("repository-search-list");
+  if(!input||!section||!list) return;
+  const lang=language(),query=input.value.trim().toLowerCase(),cards=[...document.querySelectorAll(".knowledge-card")];
+  const count=document.getElementById("post-count"),resultCount=document.getElementById("repository-search-count"),empty=document.getElementById("post-empty");
+  if(!query){
+    cards.forEach(card=>{ card.hidden=false; }); list.textContent=""; section.hidden=true;
+    if(count) count.textContent=String(cards.length).padStart(2,"0"); if(empty) empty.hidden=true; return;
+  }
+  let moduleMatches=0;
+  cards.forEach(card=>{ const match=`${card.dataset.search||""} ${card.textContent}`.toLowerCase().includes(query); card.hidden=!match; if(match) moduleMatches+=1; });
+  const articleMatches=repositorySearchRecords(lang).filter(({topic,group,article})=>[
+    topic.title.en,topic.title.zh,topic.description.en,topic.description.zh,topic.label,group,article.code,article.title,article.description,article.path
+  ].join(" ").toLowerCase().includes(query));
+  list.textContent="";
+  articleMatches.forEach(({topicKey,topic,group,article},index)=>{
+    const link=document.createElement("a"); link.className="article-row search-article-row";
+    link.href=`article.html?topic=${topicKey}&article=${article.id}&v=20260805-7`;
+    link.innerHTML=`<span class="article-index">${String(index+1).padStart(2,"0")}</span><span><small>${escapeHtml(topic.code)} · ${escapeHtml(group)} · ${escapeHtml(article.code)}</small><strong>${escapeHtml(article.title)}</strong><em>${escapeHtml(article.description)}</em></span><b>↗</b>`;
+    list.appendChild(link);
+  });
+  section.hidden=articleMatches.length===0; if(resultCount) resultCount.textContent=String(articleMatches.length).padStart(2,"0");
+  const total=moduleMatches+articleMatches.length; if(count) count.textContent=String(total).padStart(2,"0"); if(empty) empty.hidden=total>0;
+}
+
+function initRepositorySearch(){
+  const input=document.getElementById("post-search"); if(!input) return;
+  input.addEventListener("input",renderRepositorySearch); renderRepositorySearch();
+}
+
+function renderKnowledgePage(){ renderTopic(); renderArticle(); renderRepositorySearch(); }
 document.querySelectorAll("[data-language]").forEach(button=>button.addEventListener("click",()=>queueMicrotask(renderKnowledgePage)));
-renderKnowledgePage();
+initRepositorySearch(); renderKnowledgePage();
