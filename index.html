@@ -1,479 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Charles Wesley's Site</title>
-  <style>
-    /* 全局样式 */
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-      background-color: #f5f7fa;
-      color: #222;
-    }
-
-    /* 顶部导航栏 */
-    nav {
-      background-color: #111;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 30px;
-      height: 60px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .logo {
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #00ffaa;
-      text-decoration: none;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      list-style: none;
-      gap: 20px;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      padding: 10px 14px;
-      border-radius: 6px;
-      transition: background-color 0.3s;
-    }
-
-    .nav-links a:hover {
-      background-color: #333;
-    }
-
-    /* 语言切换按钮 */
-    .lang-switch {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-    .lang-btn {
-      background: transparent;
-      border: 1px solid #333;
-      color: #eee;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.95em;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .lang-btn[aria-pressed="true"] {
-      background: #1e1e1e;
-      border-color: #00ffaa;
-      color: #00ffaa;
-    }
-    .lang-btn:hover {
-      background: #222;
-      border-color: #555;
-    }
-
-    /* 下拉菜单容器 */
-    .dropdown { position: relative; }
-    .dropbtn { color: white; cursor: pointer; display: inline-block; }
-
-    /* 下拉内容 */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #222;
-      min-width: 220px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.3);
-      border-radius: 6px;
-      top: 45px;
-      left: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: all 0.25s ease;
-      z-index: 20;
-    }
-
-    .dropdown-content a {
-      color: #eee;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    .dropdown-content a:hover { background-color: #444; }
-
-    /* 悬停动画展开 */
-    .dropdown:hover .dropdown-content {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 顶部标题区 */
-    header {
-      text-align: center;
-      padding: 120px 20px 100px;
-      background: linear-gradient(180deg, #111, #1a1a1a);
-      color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    header h1 {
-      font-size: 2.6em;
-      margin-bottom: 0.4em;
-    }
-
-    header p { color: #ccc; font-size: 1.2em; }
-
-    /* 内容主体 */
-    main {
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    main h2 { color: #222; margin-bottom: 20px; }
-
-    main p {
-      font-size: 1.1em;
-      color: #555;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ===== 新增部分样式 ===== */
-    section { padding: 80px 20px; text-align: center; }
-
-    section h2 {
-      font-size: 2em;
-      color: #111;
-      margin-bottom: 20px;
-    }
-
-    section p, section ul {
-      max-width: 850px;
-      margin: 0 auto;
-      color: #555;
-      line-height: 1.8;
-      font-size: 1.05em;
-    }
-
-    section ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    section ul li {
-      background-color: white;
-      margin: 10px auto;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.08);
-      max-width: 700px;
-      text-align: left;
-    }
-
-    /* 页脚 */
-    footer {
-      text-align: center;
-      padding: 30px;
-      background-color: #111;
-      color: #aaa;
-      font-size: 0.9em;
-    }
-
-    /* 手机端导航 */
-    @media (max-width: 768px) {
-      .nav-right { gap: 10px; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #111;
-        text-align: center;
-        padding: 10px 0;
-      }
-      .nav-links.active { display: flex; }
-
-      .menu-toggle {
-        display: block;
-        cursor: pointer;
-        color: white;
-        font-size: 1.5em;
-        user-select: none;
-      }
-
-      .dropdown-content {
-        position: static;
-        opacity: 1;
-        transform: none;
-        box-shadow: none;
-      }
-
-      .lang-switch { display: none; } /* 语言切换留在菜单里 */
-      .lang-switch-inline { display: flex; gap: 8px; justify-content: center; padding: 10px 0; }
-    }
-
-    .menu-toggle { display: none; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Charles Wesley — Computer Science, Cybersecurity, AI Agents and Quantum Computing.">
+  <meta name="theme-color" content="#050816">
+  <title>Charles Wesley · Cybersecurity × AI Agents × Quantum</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
-<body>
+<body data-page="home">
+  <canvas id="cosmos" aria-hidden="true"></canvas>
+  <div class="aurora aurora-one" aria-hidden="true"></div>
+  <div class="aurora aurora-two" aria-hidden="true"></div>
 
-  <!-- 顶部导航 -->
-  <nav>
-    <a href="index.html" class="logo" data-i18n="brand">Charles Wesley</a>
-
-    <div class="nav-right">
-      <div class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu" role="button">☰</div>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
-
-        <li class="dropdown">
-          <a class="dropbtn" data-i18n="nav.projects._">Projects ▾</a>
-          <div class="dropdown-content">
-            <a href="posts/cs-notes-en.html" data-i18n="nav.projects.cs_notes">💻 Computer Science Notes</a>
-            <a href="posts/ctf-notes.html" data-i18n="nav.projects.ctf_notes">🧩 CTF Notes</a>
-            <a href="posts/noteflow.html" data-i18n="nav.projects.noteflow">🗂️ NoteFlow System</a>
-            <a href="posts/quantum.html" data-i18n="nav.projects.quantum">⚛️ Quantum Computing</a>
-          </div>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropbtn" data-i18n="nav.writings._">Writings ▾</a>
-          <div class="dropdown-content">
-            <a href="#" data-i18n="nav.writings.jianghu">📘 Jianghu Travels</a>
-            <a href="#" data-i18n="nav.writings.philosophy">🧠 Philosophy Notes</a>
-            <a href="#" data-i18n="nav.writings.essays">✍️ Literary Essays</a>
-          </div>
-        </li>
-
-        <li><a href="#" data-i18n="nav.about">About</a></li>
-        <li><a href="#" data-i18n="nav.contact">Contact</a></li>
-
-        <!-- 移动端内联语言切换（小屏显示） -->
-        <li class="lang-switch-inline">
-          <button class="lang-btn" id="btn-zh-inline" onclick="setLanguage('zh')" aria-pressed="false">中文</button>
-          <button class="lang-btn" id="btn-en-inline" onclick="setLanguage('en')" aria-pressed="true">EN</button>
-        </li>
-      </ul>
-
-      <!-- 桌面端语言切换（右上角） -->
-      <div class="lang-switch" aria-label="Language switch">
-        <button class="lang-btn" id="btn-zh" onclick="setLanguage('zh')" aria-pressed="false">中文</button>
-        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')" aria-pressed="true">EN</button>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="index.html" aria-label="Charles Wesley home">
+        <span class="brand-mark">CW</span>
+        <span>Charles Wesley</span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a class="active" href="#home" data-i18n="nav.home">Home</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="projects.html" data-i18n="nav.projects">Projects</a>
+        <a href="#activity" data-i18n="nav.activity">Activity</a>
+        <a href="https://github.com/CharlesWesley-S" target="_blank" rel="noreferrer">GitHub ↗</a>
       </div>
-    </div>
-  </nav>
-
-  <!-- 标题 -->
-  <header>
-    <h1 data-i18n="header.title">Welcome to Charles Wesley's Site</h1>
-    <p data-i18n="header.subtitle">Explore my projects, notes, and writings here.</p>
+      <div class="language-switch" aria-label="Language">
+        <button type="button" data-language="en" aria-pressed="true">EN</button>
+        <span>/</span>
+        <button type="button" data-language="zh" aria-pressed="false">中文</button>
+      </div>
+    </nav>
   </header>
 
-  <!-- 主体内容 -->
   <main>
-    <h2 data-i18n="about.title">About This Website</h2>
-    <p data-i18n="about.text">
-      This website serves as a digital hub for my work — from computer science notes and
-      CTF writeups, to my personal writings and research projects. It’s a blend of technology,
-      creativity, and philosophy.
-    </p>
+    <section class="hero shell" id="home">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="pulse"></span><span data-i18n="hero.eyebrow">SYSTEM ONLINE · DUBLIN / HANGZHOU</span></div>
+        <p class="mono-label">// RESEARCHER_BUILDER</p>
+        <h1>Charles <span>Wesley</span></h1>
+        <h2 data-i18n="hero.role">Computer Science student building intelligent systems people can trust.</h2>
+        <p class="hero-text" data-i18n="hero.intro">I explore the intersection of cybersecurity, AI agents, and quantum computing—turning ambitious ideas into practical, human-centered prototypes.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="projects.html"><span data-i18n="hero.projects">Explore projects</span><span>→</span></a>
+          <a class="button button-ghost" href="#beliefs" data-i18n="hero.thinking">Read my thinking</a>
+        </div>
+        <div class="domain-strip" aria-label="Research domains">
+          <span>CYBERSECURITY</span><i></i><span>AI AGENTS</span><i></i><span>QUANTUM</span>
+        </div>
+      </div>
+
+      <div class="quantum-stage reveal" aria-hidden="true">
+        <div class="hud-ring ring-one"></div>
+        <div class="hud-ring ring-two"></div>
+        <div class="hud-ring ring-three"></div>
+        <div class="quantum-core"><span>CW</span></div>
+        <div class="electron electron-one"></div>
+        <div class="electron electron-two"></div>
+        <div class="electron electron-three"></div>
+        <div class="coordinate coordinate-top">QBIT_01<br><strong>0.707</strong></div>
+        <div class="coordinate coordinate-bottom">TRUST_BOUNDARY<br><strong>ACTIVE</strong></div>
+      </div>
+    </section>
+
+    <section class="section shell" id="about">
+      <div class="section-heading reveal">
+        <span class="section-number">01</span>
+        <div><p class="mono-label">// IDENTITY</p><h2 data-i18n="about.title">About me</h2></div>
+      </div>
+      <div class="about-grid">
+        <article class="glass-card profile-card reveal">
+          <div class="terminal-bar"><span></span><span></span><span></span><code>whoami</code></div>
+          <p data-i18n="about.p1">Hi, I'm Charles Wesley, a Computer Science student at Trinity College Dublin.</p>
+          <p data-i18n="about.p2">My goal is to grow into a researcher-builder: someone who can understand difficult technical problems, build real systems, and connect research with practical impact.</p>
+          <blockquote data-i18n="about.quote">Curious by default. Ambitious in creation. Careful with power.</blockquote>
+        </article>
+        <div class="signal-panel reveal">
+          <div class="signal-line"><span data-i18n="about.location">Location</span><strong>Dublin · Hangzhou</strong></div>
+          <div class="signal-line"><span data-i18n="about.focus">Focus</span><strong>Security · Agents · Quantum</strong></div>
+          <div class="signal-line"><span data-i18n="about.mode">Current mode</span><strong data-i18n="about.modeValue">Learning / Building / Experimenting</strong></div>
+          <div class="signal-visual"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell" id="beliefs">
+      <div class="section-heading reveal">
+        <span class="section-number">02</span>
+        <div><p class="mono-label">// PRINCIPLES</p><h2 data-i18n="beliefs.title">What I believe</h2></div>
+      </div>
+      <div class="belief-grid">
+        <article class="belief-card reveal">
+          <div class="card-icon shield-icon">◇</div><span class="card-index">01</span>
+          <h3 data-i18n="beliefs.securityTitle">Cybersecurity should protect people, not only machines.</h3>
+          <p data-i18n="beliefs.securityText">Real attacks combine technology with psychology. The next generation of security should be proactive, context-aware, and human-centered.</p>
+        </article>
+        <article class="belief-card reveal">
+          <div class="card-icon agent-icon">⌬</div><span class="card-index">02</span>
+          <h3 data-i18n="beliefs.agentTitle">AI agents need autonomy with boundaries.</h3>
+          <p data-i18n="beliefs.agentText">Useful autonomy requires permission control, traceable actions, human confirmation, and a clear understanding of when to stop.</p>
+        </article>
+        <article class="belief-card reveal">
+          <div class="card-icon quantum-icon">⚛</div><span class="card-index">03</span>
+          <h3 data-i18n="beliefs.quantumTitle">Quantum computing will reshape security gradually, but deeply.</h3>
+          <p data-i18n="beliefs.quantumText">Quantum is not magic. Its importance lies in changing what is computationally possible and forcing us to rethink cryptographic foundations.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section shell" id="projects-preview">
+      <div class="section-heading reveal">
+        <span class="section-number">03</span>
+        <div><p class="mono-label">// SELECTED_WORK</p><h2 data-i18n="projects.title">Selected projects</h2></div>
+        <a class="text-link" href="projects.html"><span data-i18n="projects.all">View all projects</span> →</a>
+      </div>
+      <div class="project-grid compact-projects">
+        <a class="project-card reveal" href="projects.html#guardian">
+          <div class="project-code">SEC / 01</div><div class="project-orb cyan"></div>
+          <h3 data-i18n="projects.guardianTitle">AI Anti-Scam Guardian</h3>
+          <p data-i18n="projects.guardianText">A human-centered security platform for malicious links, QR codes, scam conversations, and AI-generated media.</p>
+          <div class="tag-row"><span>AI</span><span>Cybersecurity</span><span>FastAPI</span></div>
+        </a>
+        <a class="project-card reveal" href="projects.html#work-agent">
+          <div class="project-code">AGENT / 02</div><div class="project-orb violet"></div>
+          <h3 data-i18n="projects.agentTitle">Enterprise Work Agent</h3>
+          <p data-i18n="projects.agentText">An agent that understands documents, extracts action items, creates meeting summaries, and automates meaningful work.</p>
+          <div class="tag-row"><span>Agents</span><span>OCR</span><span>Automation</span></div>
+        </a>
+        <a class="project-card reveal" href="projects.html#vqc">
+          <div class="project-code">QUANT / 03</div><div class="project-orb magenta"></div>
+          <h3 data-i18n="projects.vqcTitle">VQC Intrusion Detection</h3>
+          <p data-i18n="projects.vqcText">Researching variational quantum classifiers and hybrid approaches for network intrusion detection.</p>
+          <div class="tag-row"><span>VQC</span><span>QML</span><span>Research</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section shell" id="activity">
+      <div class="section-heading reveal">
+        <span class="section-number">04</span>
+        <div><p class="mono-label">// GITHUB_SIGNAL</p><h2 data-i18n="activity.title">GitHub activity</h2></div>
+      </div>
+      <div class="stats-grid reveal">
+        <div><strong data-stat="repos">—</strong><span data-i18n="activity.repos">Public repositories</span></div>
+        <div><strong data-stat="stars">—</strong><span data-i18n="activity.stars">Stars earned</span></div>
+        <div><strong data-stat="followers">—</strong><span data-i18n="activity.followers">Followers</span></div>
+        <div><strong data-stat="following">—</strong><span data-i18n="activity.following">Following</span></div>
+      </div>
+      <div class="activity-stack">
+        <article class="activity-panel reveal">
+          <div class="panel-title"><span data-i18n="activity.heatmap">Contribution heatmap</span><span class="live-dot">LIVE</span></div>
+          <div class="heatmap-scroll">
+            <img class="heatmap" src="https://ghchart.rshah.org/22d3ee/CharlesWesley-S" alt="Charles Wesley GitHub contribution heatmap">
+          </div>
+          <p class="image-fallback" data-i18n="activity.fallback">If the live chart is temporarily unavailable, view the contribution calendar directly on GitHub.</p>
+        </article>
+        <article class="activity-panel reveal">
+          <div class="panel-title"><span data-i18n="activity.dashboard">Cosmic activity dashboard</span><span>SVG</span></div>
+          <img class="orbit-stats" src="https://raw.githubusercontent.com/CharlesWesley-S/CharlesWesley-S/main/github-orbit-stats.svg" alt="Charles Wesley GitHub activity dashboard">
+        </article>
+      </div>
+    </section>
+
+    <section class="contact shell reveal" id="contact">
+      <p class="mono-label">// NEXT_CONNECTION</p>
+      <h2 data-i18n="contact.title">Exploring a similar frontier?</h2>
+      <p data-i18n="contact.text">I'm interested in research collaborations, open-source projects, and ambitious experiments at the intersection of security, agents, and quantum computing.</p>
+      <a class="button button-primary" href="https://github.com/CharlesWesley-S" target="_blank" rel="noreferrer"><span data-i18n="contact.button">Connect on GitHub</span><span>↗</span></a>
+    </section>
   </main>
 
-  <!-- ===== 新增部分：New Section / 最新动态 ===== -->
-  <section id="new-section">
-    <h2 data-i18n="newSection.title">🔍 New Section</h2>
-    <p data-i18n="newSection.text">
-      This section is dedicated to my latest explorations and experimental ideas — including 
-      cutting-edge technologies, interdisciplinary studies, and personal reflections on innovation.
-      Stay tuned for new updates as I share thoughts on the future of computing and creativity.
-    </p>
-  </section>
-
-  <!-- ===== 新增部分：个人荣誉 / Personal Honors ===== -->
-  <section id="honors">
-    <h2 data-i18n="honors.title">🏅 Personal Honors</h2>
-    <ul>
-      <li data-i18n="honors.item1"><strong>2024</strong> </li>
-      <li data-i18n="honors.item2"><strong>2023</strong> </li>
-      <li data-i18n="honors.item3"><strong>2022</strong> </li>
-      <li data-i18n="honors.item4"><strong>2021</strong> </li>
-    </ul>
-  </section>
-
-  <!-- 页脚 -->
-  <footer>
-    <span data-i18n="footer.text">© 2025 Charles Wesley — Built with 💻 and ☕</span>
+  <footer class="footer shell">
+    <span>© <span data-current-year></span> Charles Wesley</span>
+    <span data-i18n="footer.line">Build boldly. Verify carefully. Stay curious.</span>
   </footer>
-
-  <!-- 脚本：手机端菜单切换 + 多语言切换 -->
-  <script>
-    function toggleMenu() {
-      document.getElementById("navLinks").classList.toggle("active");
-    }
-
-    /* ===== 多语言字典（可按需修改/扩充） ===== */
-    const translations = {
-      metaTitle: { en: "Charles Wesley's Site", zh: "Charles Wesley 的网站" },
-      brand:     { en: "Charles Wesley", zh: "Charles Wesley" },
-
-      nav: {
-        home:   { en: "Home", zh: "首页" },
-        about:  { en: "About", zh: "关于" },
-        contact:{ en: "Contact", zh: "联系" },
-        projects: {
-          _:         { en: "Projects ▾", zh: "项目 ▾" },
-          cs_notes:  { en: "💻 Computer Science Notes", zh: "💻 计算机科学笔记" },
-          ctf_notes: { en: "🧩 CTF Notes", zh: "🧩 CTF 笔记" },
-          noteflow:  { en: "🗂️ NoteFlow System", zh: "🗂️ NoteFlow 笔记系统" },
-          quantum:   { en: "⚛️ Quantum Computing", zh: "⚛️ 量子计算" }
-        },
-        writings: {
-          _:          { en: "Writings ▾", zh: "写作 ▾" },
-          jianghu:    { en: "📘 Jianghu Travels", zh: "📘 江湖行" },
-          philosophy: { en: "🧠 Philosophy Notes", zh: "🧠 哲学笔记" },
-          essays:     { en: "✍️ Literary Essays", zh: "✍️ 文学随笔" }
-        }
-      },
-
-      header: {
-        title:    { en: "Welcome to Charles Wesley's Site", zh: "欢迎来到 Charles Wesley 的网站" },
-        subtitle: { en: "Explore my projects, notes, and writings here.", zh: "在这里探索我的项目、笔记与随笔。" }
-      },
-
-      about: {
-        title: { en: "About This Website", zh: "关于本网站" },
-        text:  { 
-          en: "This website serves as a digital hub for my work — from computer science notes and CTF writeups, to my personal writings and research projects. It’s a blend of technology, creativity, and philosophy.",
-          zh: "本站是我知识与创作的数字基地：包含计算机科学笔记、CTF 题解与研究、以及我的个人写作与项目研究；技术、创意与哲学在此交汇。"
-        }
-      },
-
-      newSection: {
-        title: { en: "🔍 New Section", zh: "🔍 最新动态" },
-        text: {
-          en: "This section is dedicated to my latest explorations and experimental ideas — including cutting-edge technologies, interdisciplinary studies, and personal reflections on innovation. Stay tuned for new updates as I share thoughts on the future of computing and creativity.",
-          zh: "这里将记录我最新的探索与实验想法：涵盖前沿技术、跨学科研究，以及关于创新的个人思考。欢迎关注，我会持续分享对计算与创造力未来的观察。"
-        }
-      },
-
-      honors: {
-        title: { en: "🏅 Personal Honors", zh: "🏅 个人荣誉" },
-        item1: { en: "<strong>2024</strong> — ", zh: "<strong>2024</strong>" },
-        item2: { en: "<strong>2023</strong> — ", zh: "<strong>2023</strong> " },
-        item3: { en: "<strong>2022</strong> — ", zh: "<strong>2022</strong> — " },
-        item4: { en: "<strong>2021</strong> — ", zh: "<strong>2021</strong> — " }
-      },
-
-      footer: {
-        text: { en: "© 2025 Charles Wesley — Built with 💻 and ☕", zh: "© 2025 Charles Wesley — 由 💻 与 ☕ 驱动" }
-      }
-    };
-
-    /* ===== 工具函数：根据 data-i18n 批量替换文本 ===== */
-    function applyTranslations(lang) {
-      // 遍历所有带 data-i18n 的元素
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const path = el.getAttribute("data-i18n"); // 例如 "nav.projects.cs_notes"
-        const value = getNested(translations, path);
-
-        // value 可以是 { en, zh } 或嵌套对象（例如 nav.projects._）
-        let pair = value;
-        if (value && value.en !== undefined && value.zh !== undefined) {
-          // 正常键值
-        } else if (value && value[lang] !== undefined) {
-          pair = value; // 已是语言对
-        } else {
-          // 可能是容器对象，例如 nav.projects，本身没有具体文本
-          // 直接跳过
-          return;
-        }
-
-        const text = pair?.[lang];
-        if (text !== undefined) {
-          // 如果包含 HTML（如 <strong>），则用 innerHTML；否则 textContent
-          if (/<[a-z][\s\S]*>/i.test(text)) {
-            el.innerHTML = text;
-          } else {
-            el.textContent = text;
-          }
-        }
-      });
-
-      // 设置文档标题和 <html lang>
-      const metaTitle = translations.metaTitle?.[lang] || translations.metaTitle?.en || document.title;
-      document.title = metaTitle;
-      document.documentElement.lang = (lang === "zh" ? "zh-CN" : "en");
-    }
-
-    // 读取嵌套对象键，例如 "nav.projects.cs_notes"
-    function getNested(obj, path) {
-      return path.split(".").reduce((o, k) => (o || {})[k], obj);
-    }
-
-    // 语言状态 & UI
-    function setLanguage(lang) {
-      localStorage.setItem("lang", lang);
-      applyTranslations(lang);
-      updateLangButtons(lang);
-    }
-
-    function updateLangButtons(lang) {
-      const pressedEn = (lang === "en").toString();
-      const pressedZh = (lang === "zh").toString();
-
-      // 桌面端按钮
-      const btnEn = document.getElementById("btn-en");
-      const btnZh = document.getElementById("btn-zh");
-      if (btnEn && btnZh) {
-        btnEn.setAttribute("aria-pressed", pressedEn);
-        btnZh.setAttribute("aria-pressed", pressedZh);
-      }
-
-      // 移动端内联按钮
-      const btnEnInline = document.getElementById("btn-en-inline");
-      const btnZhInline = document.getElementById("btn-zh-inline");
-      if (btnEnInline && btnZhInline) {
-        btnEnInline.setAttribute("aria-pressed", pressedEn);
-        btnZhInline.setAttribute("aria-pressed", pressedZh);
-      }
-    }
-
-    // 智能检测初始语言（localStorage > 浏览器首选 > 默认 en）
-    function detectLanguage() {
-      const saved = localStorage.getItem("lang");
-      if (saved === "en" || saved === "zh") return saved;
-
-      const browser = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-      if (browser.startsWith("zh")) return "zh";
-      return "en"; // 想默认中文？改成 "zh"
-    }
-
-    // 初始化
-    (function init() {
-      const lang = detectLanguage();
-      setLanguage(lang);
-    })();
-  </script>
 </body>
 </html>
-
