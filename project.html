@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#050816">
+  <meta name="description" content="Project progress and roadmap by Charles Wesley.">
+  <title>Project Progress · Charles Wesley</title><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script>
+</head>
+<body data-page="project-detail">
+  <canvas id="cosmos" aria-hidden="true"></canvas><div class="aurora aurora-one" aria-hidden="true"></div><div class="aurora aurora-two" aria-hidden="true"></div>
+  <header class="site-header"><nav class="nav shell" aria-label="Primary navigation">
+    <a class="brand" href="index.html"><span class="brand-mark">CW</span><span>Charles Wesley</span></a><button class="menu-button" type="button" aria-expanded="false" aria-controls="nav-links">☰</button>
+    <div class="nav-links" id="nav-links"><a href="index.html" data-i18n="nav.home">Home</a><a href="index.html#about" data-i18n="nav.about">About</a><a class="active" href="projects.html" data-i18n="nav.projects">Projects</a><a href="notes.html" data-i18n="nav.notes">Notes</a><a href="https://github.com/CharlesWesley-S" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://www.zhihu.com/people/42-29-23-9-75" target="_blank" rel="noreferrer" data-i18n="nav.zhihu">Zhihu ↗</a></div>
+    <div class="language-switch" aria-label="Language"><button type="button" data-language="en" aria-pressed="true">EN</button><span>/</span><button type="button" data-language="zh" aria-pressed="false">中文</button></div>
+  </nav></header>
+  <main>
+    <section class="detail-hero shell reveal">
+      <a class="back-link" href="projects.html"><span>←</span><span data-i18n="detail.back">Back to projects</span></a>
+      <div class="detail-meta"><span class="status active-status" id="detail-status">IN DEVELOPMENT</span><code id="detail-code">SEC / AI</code></div>
+      <h1 id="detail-title">Project</h1><p id="detail-summary"></p>
+      <div class="progress-console">
+        <div class="progress-copy"><span data-i18n="detail.roadmap">ROADMAP PROGRESS</span><strong id="detail-progress">0%</strong></div>
+        <div class="progress-track"><i id="detail-progress-bar"></i></div><p id="detail-stage"></p>
+      </div>
+    </section>
+    <section class="section shell detail-grid">
+      <article class="detail-panel reveal"><p class="mono-label">// MILESTONES</p><h2 data-i18n="detail.milestones">Project milestones</h2><div class="milestone-list" id="milestone-list"></div></article>
+      <aside class="detail-panel reveal"><p class="mono-label">// NEXT_MISSION</p><h2 data-i18n="detail.next">Next mission</h2><p id="detail-next"></p><div class="detail-tags" id="detail-tags"></div><a class="button button-ghost" href="https://github.com/CharlesWesley-S" target="_blank" rel="noreferrer"><span data-i18n="detail.github">View GitHub</span><span>↗</span></a></aside>
+    </section>
+  </main>
+  <footer class="footer shell"><span>© <span data-current-year></span> Charles Wesley</span><span data-i18n="footer.line">Build boldly. Verify carefully. Stay curious.</span></footer>
+</body>
+</html>
