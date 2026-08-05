@@ -111,7 +111,7 @@ const projectDetails = {
 };
 
 const noteCatalog = [
-  { category:"cs", date:"CS / CORE", url:"posts/cs-notes.html?v=20260805-4", tags:["Algorithms","Java","Architecture"], title:{en:"Computer Science Notes",zh:"计算机科学笔记"}, description:{en:"Algorithms, programming, computer architecture, and the foundations behind reliable systems.",zh:"算法、编程、计算机体系结构，以及构建可靠系统所需的基础知识。"} },
+  { category:"cs", date:"CS / CORE", url:"posts/cs-notes.html?v=20260805-5", tags:["Algorithms","Java","Architecture"], title:{en:"Computer Science Notes",zh:"计算机科学笔记"}, description:{en:"Algorithms, programming, computer architecture, and the foundations behind reliable systems.",zh:"算法、编程、计算机体系结构，以及构建可靠系统所需的基础知识。"} },
   { category:"ctf", date:"SEC / CTF", url:"posts/ctf-notes.html?v=20260805-4", tags:["CTF","Web","Crypto"], title:{en:"CTF & Security Notes",zh:"CTF 与网络安全笔记"}, description:{en:"Challenge writeups, vulnerability thinking, cryptography practice, and defensive lessons.",zh:"挑战题复盘、漏洞思维、密码学练习与防御经验总结。"} },
   { category:"quantum", date:"QML / LAB", url:"posts/quantum.html?v=20260805-4", tags:["Quantum","VQC","QML"], title:{en:"Quantum Computing Notes",zh:"量子计算笔记"}, description:{en:"Quantum foundations, variational circuits, hybrid models, and research experiments.",zh:"量子计算基础、变分量子线路、混合模型与研究实验。"} },
   { category:"system", date:"SYS / FLOW", url:"posts/noteflow.html?v=20260805-4", tags:["Knowledge","Workflow","Notes"], title:{en:"NoteFlow Knowledge System",zh:"NoteFlow 知识系统"}, description:{en:"Experiments in organizing notes, logic, questions, tools, and long-term learning workflows.",zh:"关于笔记、逻辑、问题、工具与长期学习流程组织方式的实验。"} }
