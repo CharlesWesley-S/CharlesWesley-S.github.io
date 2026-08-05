@@ -111,10 +111,10 @@ const projectDetails = {
 };
 
 const noteCatalog = [
-  { category:"cs", date:"CS / CORE", url:"posts/cs-notes-en.html", tags:["Algorithms","Java","Architecture"], title:{en:"Computer Science Notes",zh:"计算机科学笔记"}, description:{en:"Algorithms, programming, computer architecture, and the foundations behind reliable systems.",zh:"算法、编程、计算机体系结构，以及构建可靠系统所需的基础知识。"} },
-  { category:"ctf", date:"SEC / CTF", url:"posts/ctf-notes.html", tags:["CTF","Web","Crypto"], title:{en:"CTF & Security Notes",zh:"CTF 与网络安全笔记"}, description:{en:"Challenge writeups, vulnerability thinking, cryptography practice, and defensive lessons.",zh:"挑战题复盘、漏洞思维、密码学练习与防御经验总结。"} },
-  { category:"quantum", date:"QML / LAB", url:"posts/quantum.html", tags:["Quantum","VQC","QML"], title:{en:"Quantum Computing Notes",zh:"量子计算笔记"}, description:{en:"Quantum foundations, variational circuits, hybrid models, and research experiments.",zh:"量子计算基础、变分量子线路、混合模型与研究实验。"} },
-  { category:"system", date:"SYS / FLOW", url:"posts/noteflow.html", tags:["Knowledge","Workflow","Notes"], title:{en:"NoteFlow Knowledge System",zh:"NoteFlow 知识系统"}, description:{en:"Experiments in organizing notes, logic, questions, tools, and long-term learning workflows.",zh:"关于笔记、逻辑、问题、工具与长期学习流程组织方式的实验。"} }
+  { category:"cs", date:"CS / CORE", url:"posts/cs-notes.html?v=20260805-4", tags:["Algorithms","Java","Architecture"], title:{en:"Computer Science Notes",zh:"计算机科学笔记"}, description:{en:"Algorithms, programming, computer architecture, and the foundations behind reliable systems.",zh:"算法、编程、计算机体系结构，以及构建可靠系统所需的基础知识。"} },
+  { category:"ctf", date:"SEC / CTF", url:"posts/ctf-notes.html?v=20260805-4", tags:["CTF","Web","Crypto"], title:{en:"CTF & Security Notes",zh:"CTF 与网络安全笔记"}, description:{en:"Challenge writeups, vulnerability thinking, cryptography practice, and defensive lessons.",zh:"挑战题复盘、漏洞思维、密码学练习与防御经验总结。"} },
+  { category:"quantum", date:"QML / LAB", url:"posts/quantum.html?v=20260805-4", tags:["Quantum","VQC","QML"], title:{en:"Quantum Computing Notes",zh:"量子计算笔记"}, description:{en:"Quantum foundations, variational circuits, hybrid models, and research experiments.",zh:"量子计算基础、变分量子线路、混合模型与研究实验。"} },
+  { category:"system", date:"SYS / FLOW", url:"posts/noteflow.html?v=20260805-4", tags:["Knowledge","Workflow","Notes"], title:{en:"NoteFlow Knowledge System",zh:"NoteFlow 知识系统"}, description:{en:"Experiments in organizing notes, logic, questions, tools, and long-term learning workflows.",zh:"关于笔记、逻辑、问题、工具与长期学习流程组织方式的实验。"} }
 ];
 
 const noteState = { filter:"all", query:"", lang:"en" };
@@ -130,6 +130,12 @@ function setLanguage(language) {
     const value = copy[lang][node.dataset.i18nPlaceholder];
     if (value) node.setAttribute("placeholder", value);
   });
+  document.querySelectorAll("[data-copy-en][data-copy-zh]").forEach((node) => {
+    node.textContent = lang === "zh" ? node.dataset.copyZh : node.dataset.copyEn;
+  });
+  document.querySelectorAll("[data-placeholder-en][data-placeholder-zh]").forEach((node) => {
+    node.setAttribute("placeholder", lang === "zh" ? node.dataset.placeholderZh : node.dataset.placeholderEn);
+  });
   document.querySelectorAll("[data-language]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.language === lang)));
   const page = document.body.dataset.page;
   const titles = {
@@ -138,7 +144,9 @@ function setLanguage(language) {
     "project-detail": { en:"Project Progress · Charles Wesley", zh:"项目进度 · Charles Wesley" },
     home: { en:"Charles Wesley · Cybersecurity × AI Agents × Quantum", zh:"Charles Wesley · 网络安全 × AI Agent × 量子计算" }
   };
-  document.title = (titles[page] || titles.home)[lang];
+  document.title = page === "post"
+    ? (lang === "zh" ? document.body.dataset.titleZh : document.body.dataset.titleEn)
+    : (titles[page] || titles.home)[lang];
   localStorage.setItem("cw-language", lang);
   noteState.lang = lang;
   renderNotes();
@@ -178,6 +186,27 @@ function initNotes() {
   addEventListener("keydown", (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); input.focus(); }
   });
+}
+
+function initPostSearch() {
+  const input = document.getElementById("post-search");
+  if (!input) return;
+  const cards = [...document.querySelectorAll(".knowledge-card")];
+  const count = document.getElementById("post-count");
+  const empty = document.getElementById("post-empty");
+  const filter = () => {
+    const query = input.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach((card) => {
+      const match = !query || `${card.dataset.search || ""} ${card.textContent}`.toLowerCase().includes(query);
+      card.hidden = !match;
+      if (match) visible += 1;
+    });
+    if (count) count.textContent = String(visible).padStart(2,"0");
+    if (empty) empty.hidden = visible > 0;
+  };
+  input.addEventListener("input", filter);
+  filter();
 }
 
 function renderProjectDetail(lang) {
@@ -287,4 +316,4 @@ function initCosmos() {
 }
 
 document.querySelectorAll("[data-current-year]").forEach((node) => { node.textContent = new Date().getFullYear(); });
-initLanguage(); initNavigation(); initNotes(); initClickableCards(); initReveal(); loadGitHubStats(); initCosmos();
+initLanguage(); initNavigation(); initNotes(); initPostSearch(); initClickableCards(); initReveal(); loadGitHubStats(); initCosmos();
